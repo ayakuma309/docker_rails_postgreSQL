@@ -7,3 +7,10 @@ ADD Gemfile /docker_rails/Gemfile
 ADD Gemfile.lock /docker_rails/Gemfile.lock
 RUN bundle install
 ADD . /docker_rails
+
+COPY entrypoint.sh /usr/bin/
+RUN chmod +x /usr/bin/entrypoint.sh
+ENTRYPOINT ["entrypoint.sh"]
+EXPOSE 3000
+
+CMD ["rails", "server", "-b", "0.0.0.0"]
